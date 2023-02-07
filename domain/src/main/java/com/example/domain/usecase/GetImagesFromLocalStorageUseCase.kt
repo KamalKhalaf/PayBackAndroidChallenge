@@ -9,5 +9,5 @@ import com.example.domain.repo.DataRepositorySource
 
 
 class GetImagesFromLocalStorageUseCase (private val imagesRepo: DataRepositorySource) {
-    operator fun invoke() = imagesRepo.getImagesFromLocalStorage()
+    suspend fun invoke() = imagesRepo.getImagesFromLocalStorage()
 }

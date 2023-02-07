@@ -3,7 +3,9 @@ package com.example.data.repo
 import com.example.data.remote.ServiceApi
 import com.example.domain.entity.ImagesPixabayList
 import com.example.domain.repo.DataRepositorySource
+import com.example.paybackandroidchallenge.common.BaseResult
 import com.example.paybackandroidchallenge.common.NetworkConnectivity
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @Created by: Kamal.Farghali
@@ -12,12 +14,11 @@ import com.example.paybackandroidchallenge.common.NetworkConnectivity
 
 
 class DataRepositorySourceImpl (private val serviceApi: ServiceApi, private val networkConnectivity: NetworkConnectivity) : DataRepositorySource {
-
-    override fun getImagesFromRemote(): ImagesPixabayList {
+    override suspend fun getImagesFromRemote(): Flow<BaseResult<ImagesPixabayList, ImagesPixabayList>> {
         TODO("Not yet implemented")
     }
 
-    override fun getImagesFromLocalStorage(): ImagesPixabayList {
+    override suspend fun getImagesFromLocalStorage(): Flow<BaseResult<ImagesPixabayList, ImagesPixabayList>> {
         TODO("Not yet implemented")
     }
 }
