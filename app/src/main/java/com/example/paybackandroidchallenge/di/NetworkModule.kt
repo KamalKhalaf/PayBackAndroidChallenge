@@ -53,4 +53,8 @@ object NetworkModule {
         }.build()
     }
 
+    @Provides
+    fun provideErrorInterceptor() : ErrorInterceptor {
+        return ErrorInterceptor()
+    }
 }

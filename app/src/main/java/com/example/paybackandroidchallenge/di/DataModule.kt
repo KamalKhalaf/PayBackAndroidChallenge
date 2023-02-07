@@ -1,9 +1,9 @@
 package com.example.paybackandroidchallenge.di
 
+import com.example.common.NetworkConnectivity
 import com.example.data.remote.ServiceApi
 import com.example.data.repo.DataRepositorySourceImpl
 import com.example.domain.repo.DataRepositorySource
-import com.example.paybackandroidchallenge.common.NetworkConnectivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

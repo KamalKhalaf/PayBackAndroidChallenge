@@ -1,4 +1,4 @@
-package com.example.paybackandroidchallenge.common
+package com.example.common
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 /**
  * @Created by: Kamal.Farghali
- * @Date: 07/02/2023 : 11:56 PM
+ * @Date: 08/02/2023 : 1:17 AM
  */
 
 @Singleton
