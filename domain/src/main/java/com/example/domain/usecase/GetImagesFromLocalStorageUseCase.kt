@@ -1,6 +1,7 @@
 package com.example.domain.usecase
 
 import com.example.domain.repo.DataRepositorySource
+import javax.inject.Inject
 
 /**
  * @Created by: Kamal.Farghali
@@ -8,6 +9,6 @@ import com.example.domain.repo.DataRepositorySource
  */
 
 
-class GetImagesFromLocalStorageUseCase (private val imagesRepo: DataRepositorySource) {
-    operator fun invoke() = imagesRepo.getImagesFromLocalStorage()
+class GetImagesFromLocalStorageUseCase @Inject constructor(private val imagesRepo: DataRepositorySource) {
+    suspend fun invoke() = imagesRepo.getImagesFromLocalStorage()
 }
