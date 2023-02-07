@@ -1,7 +1,8 @@
-package com.example.paybackandroidchallenge
+package com.example.paybackandroidchallenge.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.paybackandroidchallenge.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
