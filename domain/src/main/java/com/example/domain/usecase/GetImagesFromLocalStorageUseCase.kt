@@ -7,6 +7,7 @@ import com.example.domain.repo.ImagesRepositorySource
  * @Date: 07/02/2023 : 10:39 PM
  */
 
+
 class GetImagesFromLocalStorageUseCase (private val imagesRepo: ImagesRepositorySource) {
     operator fun invoke() = imagesRepo.getImagesFromLocalStorage()
 }
