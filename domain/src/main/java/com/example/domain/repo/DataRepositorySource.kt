@@ -1,6 +1,7 @@
 package com.example.domain.repo
 
 import com.example.common.BaseResult
+import com.example.common.WrappedErrorResponse
 import com.example.domain.entity.ImagesPixabayList
 import kotlinx.coroutines.flow.Flow
 
@@ -11,6 +12,6 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface DataRepositorySource {
-    suspend fun getImagesFromRemote(): Flow<BaseResult<ImagesPixabayList, ImagesPixabayList>>
-    suspend fun getImagesFromLocalStorage(): Flow<BaseResult<ImagesPixabayList, ImagesPixabayList>>
+    suspend fun getImagesFromRemote(search : String): Flow<BaseResult<ImagesPixabayList, WrappedErrorResponse<ImagesPixabayList>>>
+    suspend fun getImagesFromLocalStorage(): Flow<BaseResult<ImagesPixabayList, WrappedErrorResponse<ImagesPixabayList>>>
 }

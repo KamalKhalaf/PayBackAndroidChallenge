@@ -3,6 +3,7 @@ package com.example.paybackandroidchallenge.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.BaseResult
+import com.example.common.WrappedErrorResponse
 import com.example.domain.entity.ImagesPixabayList
 import com.example.domain.usecase.GetImagesFromLocalStorageUseCase
 import com.example.domain.usecase.GetImagesFromRemoteUseCase
@@ -34,9 +35,9 @@ class ImagesViewModel @Inject constructor(
         _state.value = ImagesViewStatus.IsLoading(isLoading)
     }
 
-    fun getImages() {
+    fun getImages(search : String) {
         viewModelScope.launch {
-            getImagesFromRemoteUseCase.invoke()
+            getImagesFromRemoteUseCase.invoke(search)
                 .onStart {
                     setLoading(true)
                 }
@@ -60,5 +61,5 @@ sealed class ImagesViewStatus {
     data class IsLoading(val isLoading: Boolean) : ImagesViewStatus()
     data class ShowToast(val message: String) : ImagesViewStatus()
     data class SuccessGetImages(val response: ImagesPixabayList) : ImagesViewStatus()
-    data class ErrorGetImages(val error: ImagesPixabayList) : ImagesViewStatus()
+    data class ErrorGetImages(val error: WrappedErrorResponse<ImagesPixabayList>) : ImagesViewStatus()
 }
