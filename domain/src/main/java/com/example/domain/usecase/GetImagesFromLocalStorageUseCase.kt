@@ -1,6 +1,6 @@
 package com.example.domain.usecase
 
-import com.example.domain.repo.ImagesRepositorySource
+import com.example.domain.repo.DataRepositorySource
 
 /**
  * @Created by: Kamal.Farghali
@@ -8,6 +8,6 @@ import com.example.domain.repo.ImagesRepositorySource
  */
 
 
-class GetImagesFromLocalStorageUseCase (private val imagesRepo: ImagesRepositorySource) {
+class GetImagesFromLocalStorageUseCase (private val imagesRepo: DataRepositorySource) {
     operator fun invoke() = imagesRepo.getImagesFromLocalStorage()
 }

@@ -8,7 +8,7 @@ import com.example.domain.entity.ImagesPixabayList
  */
 
 
-interface ImagesRepositorySource {
+interface DataRepositorySource {
     fun getImagesFromRemote(): ImagesPixabayList
     fun getImagesFromLocalStorage(): ImagesPixabayList
 }
