@@ -3,6 +3,7 @@ package com.example.data.repo
 import com.example.data.remote.ServiceApi
 import com.example.domain.entity.ImagesPixabayList
 import com.example.domain.repo.DataRepositorySource
+import com.example.paybackandroidchallenge.common.NetworkConnectivity
 
 /**
  * @Created by: Kamal.Farghali
@@ -10,7 +11,8 @@ import com.example.domain.repo.DataRepositorySource
  */
 
 
-class DataRepositorySourceImpl (private val serviceApi: ServiceApi) : DataRepositorySource {
+class DataRepositorySourceImpl (private val serviceApi: ServiceApi, private val networkConnectivity: NetworkConnectivity) : DataRepositorySource {
+
     override fun getImagesFromRemote(): ImagesPixabayList {
         TODO("Not yet implemented")
     }

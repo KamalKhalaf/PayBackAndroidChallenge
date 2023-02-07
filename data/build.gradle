@@ -40,6 +40,7 @@ dependencies {
 
 
     implementation project(path: ':domain')
+    implementation project(path: ':app')
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
