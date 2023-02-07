@@ -1,7 +1,7 @@
 package com.example.domain.repo
 
+import com.example.common.BaseResult
 import com.example.domain.entity.ImagesPixabayList
-import com.example.paybackandroidchallenge.common.BaseResult
 import kotlinx.coroutines.flow.Flow
 
 /**

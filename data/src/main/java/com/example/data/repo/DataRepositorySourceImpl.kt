@@ -1,10 +1,10 @@
 package com.example.data.repo
 
+import com.example.common.BaseResult
+import com.example.common.NetworkConnectivity
 import com.example.data.remote.ServiceApi
 import com.example.domain.entity.ImagesPixabayList
 import com.example.domain.repo.DataRepositorySource
-import com.example.paybackandroidchallenge.common.BaseResult
-import com.example.paybackandroidchallenge.common.NetworkConnectivity
 import kotlinx.coroutines.flow.Flow
 
 /**

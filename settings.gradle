@@ -16,3 +16,4 @@ rootProject.name = "PayBackAndroidChallenge"
 include ':app'
 include ':domain'
 include ':data'
+include ':common'
