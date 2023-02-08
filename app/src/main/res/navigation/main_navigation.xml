@@ -9,5 +9,23 @@
         android:id="@+id/imagesListFragment"
         android:name="com.example.paybackandroidchallenge.ImagesListFragment"
         android:label="fragment_images_list"
-        tools:layout="@layout/fragment_images_list" />
+        tools:layout="@layout/fragment_images_list" >
+        <action
+            android:id="@+id/action_imagesListFragment_to_imageDetailsFragment"
+            app:destination="@id/imageDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageDetailsFragment"
+        android:name="com.example.paybackandroidchallenge.ImageDetailsFragment"
+        android:label="fragment_image_details"
+        tools:layout="@layout/fragment_image_details" >
+        <argument
+            android:name="imageDetails"
+            app:argType="com.example.domain.entity.Hit" />
+    </fragment>
 </navigation>

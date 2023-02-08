@@ -1,9 +1,13 @@
 package com.example.paybackandroidchallenge.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.BaseResult
+import com.example.common.SingleEvent
 import com.example.common.WrappedErrorResponse
+import com.example.domain.entity.Hit
 import com.example.domain.entity.ImagesPixabayList
 import com.example.domain.usecase.GetImagesFromLocalStorageUseCase
 import com.example.domain.usecase.GetImagesFromRemoteUseCase
@@ -33,6 +37,13 @@ class ImagesViewModel @Inject constructor(
 
     private fun setLoading(isLoading: Boolean) {
         _state.value = ImagesViewStatus.IsLoading(isLoading)
+    }
+
+    private val _openImageDetails = MutableLiveData<SingleEvent<Hit>>()
+    val openImageDetails: LiveData<SingleEvent<Hit>> get() = _openImageDetails
+
+    fun openImageDetails(imageDetails: Hit) {
+        _openImageDetails.value = SingleEvent(imageDetails)
     }
 
     fun getImages(search : String) {
