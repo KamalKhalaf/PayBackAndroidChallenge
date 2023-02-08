@@ -1,8 +1,11 @@
 package com.example.domain.entity
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Hit(
     @SerializedName("collections")
     var collections: Int?,
@@ -48,4 +51,4 @@ data class Hit(
     var webformatURL: String?,
     @SerializedName("webformatWidth")
     var webformatWidth: Int?
-)
+): Parcelable
