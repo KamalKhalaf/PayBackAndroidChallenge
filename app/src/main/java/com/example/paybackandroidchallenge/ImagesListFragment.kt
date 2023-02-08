@@ -14,8 +14,11 @@ import com.example.paybackandroidchallenge.databinding.FragmentImagesListBinding
 import com.example.paybackandroidchallenge.viewmodel.ImagesViewModel
 import com.example.paybackandroidchallenge.viewmodel.ImagesViewStatus
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ImagesListFragment :
@@ -23,10 +26,12 @@ class ImagesListFragment :
 
     private val viewmodel: ImagesViewModel by viewModels()
     private lateinit var imagesAdapter: ImagesAdapter
+    private var searchJob: Job? = null
+    var debouncePeriod: Long = 500
 
     override fun initViews() {
 
-        viewmodel.getImages()
+        viewmodel.searchImages("fruits")
         viewmodel.state
             .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
             .onEach { status -> handleResponse(status) }
@@ -35,11 +40,15 @@ class ImagesListFragment :
         observeEvent(viewmodel.openImageDetails, ::navigateToDetailsScreen)
 
         binding.etSearch.doAfterTextChanged { text ->
-            if (text != null) {
-                if (text.isEmpty()) {
-                    viewmodel.resetSearch()
-                } else {
-                    viewmodel.searchImages(text.toString().replace(" ", "+"))
+            searchJob?.cancel()
+            searchJob = lifecycleScope.launch {
+                text?.let {
+                    delay(debouncePeriod)
+                    if (it.isEmpty()) {
+                        viewmodel.resetSearch()
+                    } else {
+                        viewmodel.searchImages(text.toString().replace(" ", "+"))
+                    }
                 }
             }
         }

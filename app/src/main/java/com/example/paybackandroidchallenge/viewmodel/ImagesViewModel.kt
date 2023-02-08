@@ -81,26 +81,6 @@ class ImagesViewModel @Inject constructor(
     fun resetSearch() {
         searchJob?.cancel()
     }
-
-    fun getImages(search : String = "fruits") {
-        viewModelScope.launch {
-            getImagesFromRemoteUseCase.invoke(search)
-                .onStart {
-                    setLoading(true)
-                }
-                .catch { exception ->
-                    _state.value = ImagesViewStatus.ShowToast(exception.message.toString())
-                    setLoading(false)
-                }
-                .collect { result ->
-                    setLoading(false)
-                    when (result) {
-                        is BaseResult.Success -> _state.value = ImagesViewStatus.SuccessGetImages(result.data)
-                        is BaseResult.Error -> _state.value = ImagesViewStatus.ErrorGetImages(result.rawResponse)
-                    }
-                }
-        }
-    }
 }
 
 sealed class ImagesViewStatus {
