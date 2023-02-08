@@ -1,5 +1,6 @@
 package com.example.paybackandroidchallenge.viewmodel
 
+import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,12 +13,11 @@ import com.example.domain.entity.ImagesPixabayList
 import com.example.domain.usecase.GetImagesFromLocalStorageUseCase
 import com.example.domain.usecase.GetImagesFromRemoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.ceil
 
 /**
  * @Created by: Kamal.Farghali
@@ -35,6 +35,9 @@ class ImagesViewModel @Inject constructor(
         MutableStateFlow<ImagesViewStatus>(ImagesViewStatus.Init)
     val state: StateFlow<ImagesViewStatus> get() = _state
 
+    private val keywordFlow = MutableSharedFlow<String>()
+    private var searchJob: Job? = null
+
     private fun setLoading(isLoading: Boolean) {
         _state.value = ImagesViewStatus.IsLoading(isLoading)
     }
@@ -46,24 +49,37 @@ class ImagesViewModel @Inject constructor(
         _openImageDetails.value = SingleEvent(imageDetails)
     }
 
-    fun getImages(search : String) {
+    fun searchImages(keyword: String) {
         viewModelScope.launch {
-            getImagesFromRemoteUseCase.invoke(search)
-                .onStart {
-                    setLoading(true)
-                }
-                .catch { exception ->
-                    _state.value = ImagesViewStatus.ShowToast(exception.message.toString())
-                    setLoading(false)
-                }
-                .collect { result ->
-                    setLoading(false)
-                    when (result) {
-                        is BaseResult.Success -> _state.value = ImagesViewStatus.SuccessGetImages(result.data)
-                        is BaseResult.Error -> _state.value = ImagesViewStatus.ErrorGetImages(result.rawResponse)
-                    }
-                }
+            keywordFlow.emit(keyword)
         }
+    }
+
+    init {
+        viewModelScope.launch {
+            keywordFlow.collectLatest {
+                searchJob?.cancel()
+                getImagesFromRemoteUseCase.invoke(it)
+                    .onStart {
+                        setLoading(true)
+                    }
+                    .catch { exception ->
+                        _state.value = ImagesViewStatus.ShowToast(exception.message.toString())
+                        setLoading(false)
+                    }
+                    .collect { result ->
+                        setLoading(false)
+                        when (result) {
+                            is BaseResult.Success -> _state.value = ImagesViewStatus.SuccessGetImages(result.data)
+                            is BaseResult.Error -> _state.value = ImagesViewStatus.ErrorGetImages(result.rawResponse)
+                        }
+                    }
+            }
+        }
+    }
+
+    fun resetSearch() {
+        searchJob?.cancel()
     }
 }
 
