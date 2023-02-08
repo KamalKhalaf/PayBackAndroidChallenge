@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dimen_30">30dp</dimen>
+    <dimen name="dimen_3">3dp</dimen>
+    <dimen name="dimen_5">5dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="txt_normal_larg">14sp</dimen>
 </resources>
