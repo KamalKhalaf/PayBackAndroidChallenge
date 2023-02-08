@@ -34,15 +34,15 @@ class ImagesListFragment :
             .onEach { status -> handleResponse(status) }
             .launchIn(lifecycleScope)
 
-//        observeEvent(viewmodel.openImageDetails, ::navigateToDetailsScreen)
+        observeEvent(viewmodel.openImageDetails, ::navigateToDetailsScreen)
     }
 
 
-//    private fun navigateToDetailsScreen(card: SingleEvent<Hit>) {
-//        card.getContentIfNotHandled()?.let {
-//            navigate(ImagesListFragmentDirections.actionDebitCardInfoFragmentToCardDetailsFragment(it))
-//        }
-//    }
+    private fun navigateToDetailsScreen(card: SingleEvent<Hit>) {
+        card.getContentIfNotHandled()?.let {
+            navigate(ImagesListFragmentDirections.actionImagesListFragmentToImageDetailsFragment(it))
+        }
+    }
 
     private fun handleResponse(status: ImagesViewStatus) {
         when (status) {
