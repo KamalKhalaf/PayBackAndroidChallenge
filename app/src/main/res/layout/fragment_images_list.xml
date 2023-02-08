@@ -22,16 +22,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/etOldMobile"
+            android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:ems="10"
-            android:enabled="false"
             android:hint="@string/search"
             android:imeOptions="actionNext"
-            android:inputType="phone"
-            android:maxLength="10"
+            android:inputType="text"
             android:maxLines="1"
             android:paddingStart="@dimen/dimen_10"
             android:paddingTop="@dimen/dimen_5"
