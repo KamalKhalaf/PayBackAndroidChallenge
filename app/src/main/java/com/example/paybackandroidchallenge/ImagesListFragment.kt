@@ -5,8 +5,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.common.SingleEvent
 import com.example.common.gone
+import com.example.common.observeEvent
 import com.example.common.visible
+import com.example.domain.entity.Hit
 import com.example.paybackandroidchallenge.adapter.ImagesAdapter
 import com.example.paybackandroidchallenge.base.BaseFragment
 import com.example.paybackandroidchallenge.databinding.FragmentImagesListBinding
@@ -17,10 +20,11 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class ImagesListFragment : BaseFragment<FragmentImagesListBinding>(FragmentImagesListBinding::inflate) {
+class ImagesListFragment :
+    BaseFragment<FragmentImagesListBinding>(FragmentImagesListBinding::inflate) {
 
     private val viewmodel: ImagesViewModel by viewModels()
-    private lateinit var imagesAdapter : ImagesAdapter
+    private lateinit var imagesAdapter: ImagesAdapter
 
     override fun initViews() {
 
@@ -30,7 +34,15 @@ class ImagesListFragment : BaseFragment<FragmentImagesListBinding>(FragmentImage
             .onEach { status -> handleResponse(status) }
             .launchIn(lifecycleScope)
 
+//        observeEvent(viewmodel.openImageDetails, ::navigateToDetailsScreen)
     }
+
+
+//    private fun navigateToDetailsScreen(card: SingleEvent<Hit>) {
+//        card.getContentIfNotHandled()?.let {
+//            navigate(ImagesListFragmentDirections.actionDebitCardInfoFragmentToCardDetailsFragment(it))
+//        }
+//    }
 
     private fun handleResponse(status: ImagesViewStatus) {
         when (status) {
@@ -38,12 +50,14 @@ class ImagesListFragment : BaseFragment<FragmentImagesListBinding>(FragmentImage
             is ImagesViewStatus.ShowToast -> showShortToast(status.message)
             is ImagesViewStatus.SuccessGetImages -> {
                 val response = status.response
-                response.hits?.let { imagesAdapter = ImagesAdapter(it) }
-                binding.rvImages.apply {
-                    layoutManager = LinearLayoutManager(requireActivity())
-                    isNestedScrollingEnabled = false
-                    adapter = imagesAdapter
-                    imagesAdapter.notifyDataSetChanged()
+                response.hits?.let {
+                    imagesAdapter = ImagesAdapter(it, viewmodel)
+                    binding.rvImages.apply {
+                        layoutManager = LinearLayoutManager(requireActivity())
+                        isNestedScrollingEnabled = false
+                        adapter = imagesAdapter
+                        imagesAdapter.notifyDataSetChanged()
+                    }
                 }
             }
             is ImagesViewStatus.ErrorGetImages -> {

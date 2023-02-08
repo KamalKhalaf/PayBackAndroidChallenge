@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.common.RecyclerItemListener
 import com.example.domain.entity.Hit
 import com.example.paybackandroidchallenge.databinding.ImageListItemBinding
+import com.example.paybackandroidchallenge.viewmodel.ImagesViewModel
 
 /**
  * @Created by: Kamal.Farghali
@@ -14,7 +16,13 @@ import com.example.paybackandroidchallenge.databinding.ImageListItemBinding
  */
 
 
-internal class ImagesAdapter(var items: List<Hit?>) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
+internal class ImagesAdapter(var items: List<Hit?>, private var viewModel: ImagesViewModel) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
+
+    private val onItemSelectedListener: RecyclerItemListener = object : RecyclerItemListener {
+        override fun onItemSelected(item: Any) {
+            viewModel.openImageDetails(item as Hit)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ImageListItemBinding.inflate(LayoutInflater.from(parent.context))

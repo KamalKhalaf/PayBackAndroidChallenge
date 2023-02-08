@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 /**
  * @Created by: Kamal.Farghali
@@ -36,3 +39,11 @@ fun View.visible(){
 }
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
+
+fun <T> LifecycleOwner.observeEvent(
+    liveData: LiveData<SingleEvent<T>>,
+    action: (t: SingleEvent<T>) -> Unit
+) {
+    liveData.observe(this, Observer { it?.let { t -> action(t) } })
+}
+

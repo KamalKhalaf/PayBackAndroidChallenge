@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.common.RecyclerItemListener
 import com.example.domain.entity.Hit
 import com.example.paybackandroidchallenge.databinding.ImageListItemBinding
 import com.example.paybackandroidchallenge.databinding.ImageTagListItemBinding
+import com.example.paybackandroidchallenge.viewmodel.ImagesViewModel
 
 /**
  * @Created by: Kamal.Farghali
