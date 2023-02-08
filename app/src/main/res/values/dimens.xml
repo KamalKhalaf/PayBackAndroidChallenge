@@ -6,4 +6,5 @@
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="txt_normal_larg">14sp</dimen>
     <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_50">50dp</dimen>
 </resources>
