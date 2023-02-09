@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/imagesListFragment"
-        android:name="com.example.paybackandroidchallenge.ImagesListFragment"
+        android:name="com.example.paybackandroidchallenge.views.ImagesListFragment"
         android:label="fragment_images_list"
         tools:layout="@layout/fragment_images_list" >
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/imageDetailsFragment"
-        android:name="com.example.paybackandroidchallenge.ImageDetailsFragment"
+        android:name="com.example.paybackandroidchallenge.views.ImageDetailsFragment"
         android:label="fragment_image_details"
         tools:layout="@layout/fragment_image_details" >
         <argument

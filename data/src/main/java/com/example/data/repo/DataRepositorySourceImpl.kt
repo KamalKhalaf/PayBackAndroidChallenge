@@ -20,13 +20,24 @@ class DataRepositorySourceImpl (private val serviceApi: ServiceApi, private val 
             val response = serviceApi.getImages(search)
             emit(
                 when {
-                    !networkConnectivity.isConnected() -> BaseResult.Error(
-                        WrappedErrorResponse(
-                            status = "error",
-                            statusCode = -1
+                    !networkConnectivity.isConnected() -> {
+
+                        // TODO Get the data from the local storage is there is or return error
+
+
+                        BaseResult.Error(
+                            WrappedErrorResponse(
+                                status = "error",
+                                statusCode = -1
+                            )
                         )
-                    )
-                    response.isSuccessful -> BaseResult.Success(response.body()!!)
+                    }
+                    response.isSuccessful -> {
+
+                        //TODO Get the data from remote server and save it too the local storage
+                        //fetchImagesFromRemoteAndSaveToCache(response.body()!!)
+                        BaseResult.Success(response.body()!!)
+                    }
                     else -> {
                         BaseResult.Error(
                             WrappedErrorResponse(
@@ -42,5 +53,9 @@ class DataRepositorySourceImpl (private val serviceApi: ServiceApi, private val 
 
     override suspend fun getImagesFromLocalStorage(): Flow<BaseResult<ImagesPixabayList, WrappedErrorResponse<ImagesPixabayList>>> {
         TODO("Not yet implemented")
+    }
+
+    private suspend fun fetchImagesFromRemoteAndSaveToCache(response: ImagesPixabayList){
+        //TODO Get the data from the local storage
     }
 }

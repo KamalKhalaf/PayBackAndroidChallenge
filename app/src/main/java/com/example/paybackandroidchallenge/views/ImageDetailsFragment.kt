@@ -1,4 +1,4 @@
-package com.example.paybackandroidchallenge
+package com.example.paybackandroidchallenge.views
 
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
