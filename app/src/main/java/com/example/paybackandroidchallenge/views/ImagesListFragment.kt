@@ -1,4 +1,4 @@
-package com.example.paybackandroidchallenge
+package com.example.paybackandroidchallenge.views
 
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -56,7 +56,11 @@ class ImagesListFragment :
 
     private fun navigateToDetailsScreen(card: SingleEvent<Hit>) {
         card.getContentIfNotHandled()?.let {
-            navigate(ImagesListFragmentDirections.actionImagesListFragmentToImageDetailsFragment(it))
+            navigate(
+                ImagesListFragmentDirections.actionImagesListFragmentToImageDetailsFragment(
+                    it
+                )
+            )
         }
     }
 
