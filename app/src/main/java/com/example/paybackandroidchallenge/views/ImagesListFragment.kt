@@ -1,5 +1,6 @@
 package com.example.paybackandroidchallenge.views
 
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -19,6 +20,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import com.example.paybackandroidchallenge.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 @AndroidEntryPoint
 class ImagesListFragment :
@@ -30,7 +33,6 @@ class ImagesListFragment :
     var debouncePeriod: Long = 500
 
     override fun initViews() {
-
         viewmodel.searchImages("fruits")
         viewmodel.state
             .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
@@ -56,11 +58,21 @@ class ImagesListFragment :
 
     private fun navigateToDetailsScreen(card: SingleEvent<Hit>) {
         card.getContentIfNotHandled()?.let {
-            navigate(
-                ImagesListFragmentDirections.actionImagesListFragmentToImageDetailsFragment(
-                    it
-                )
-            )
+            MaterialAlertDialogBuilder(binding.root.context)
+                .setCancelable(false)
+                .setMessage(getString(R.string.dialog_message))
+                .setPositiveButton(getString(R.string.button_text_ok)) { dialog, _ ->
+                    navigate(
+                        ImagesListFragmentDirections.actionImagesListFragmentToImageDetailsFragment(
+                            it
+                        )
+                    )
+                    dialog.dismiss()
+                }
+                .setNegativeButton(getString(R.string.button_text_cancel)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
     }
 
@@ -88,7 +100,8 @@ class ImagesListFragment :
             }
             is ImagesViewStatus.ErrorGetImages -> {
                 val response = status.error
-
+                //TODO Handle the failure scenarios and show error View based on the return error
+                showShortToast(status.error.status.toString())
             }
             else -> {
             }
