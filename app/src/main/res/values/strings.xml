@@ -6,4 +6,9 @@
     <string name="likes">Likes</string>
     <string name="comments">Comments</string>
     <string name="downloads">Downloads</string>
+    <string name="search">Search........</string>
+    <string name="general_error">Sorry, something was wrong</string>
+    <string name="button_text_ok">Yes</string>
+    <string name="button_text_cancel">Cancel</string>
+    <string name="dialog_message">Are you sure you want to see more details about the image</string>
 </resources>

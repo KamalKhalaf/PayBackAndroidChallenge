@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
+    android:padding="@dimen/dimen_5"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,8 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_margin="@dimen/dimen_5"
-        android:layout_marginEnd="@dimen/dimen_10"
         app:cardCornerRadius="@dimen/dimen_5"
         app:cardElevation="@dimen/dimen_5"
         app:layout_constraintStart_toStartOf="parent"
