@@ -5,13 +5,14 @@ import okhttp3.Protocol
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import java.net.SocketTimeoutException
+import javax.inject.Singleton
 
 /**
  * @Created by: Kamal.Farghali
  * @Date: 07/02/2023 : 11:47 PM
  */
 
-
+@Singleton
 class ErrorInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
