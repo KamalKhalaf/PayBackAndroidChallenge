@@ -13,5 +13,5 @@ import retrofit2.http.Query
 interface ServiceApi {
 
     @GET("api")
-    suspend fun getImages(@Query("q") search : String, @Query("key") apiKey : String = "33456474-eb6a56f63a9ae611faa1546d3", @Query("image_type") image_type : String = "photo"): Response<ImagesPixabayList>
+    suspend fun getImages(@Query("q") search : String, @Query("image_type") image_type : String = "photo"): Response<ImagesPixabayList>
 }

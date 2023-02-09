@@ -1,6 +1,7 @@
 package com.example.paybackandroidchallenge.di
 
 import com.example.paybackandroidchallenge.BuildConfig
+import com.example.paybackandroidchallenge.common.ApiKeyInterceptor
 import com.example.paybackandroidchallenge.common.ErrorInterceptor
 import dagger.Module
 import dagger.Provides
@@ -33,12 +34,13 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttp(errorInterceptor: ErrorInterceptor) : OkHttpClient {
+    fun provideOkHttp(errorInterceptor: ErrorInterceptor, apiKeyInterceptor: ApiKeyInterceptor) : OkHttpClient {
         return OkHttpClient.Builder().apply {
             connectTimeout(60, TimeUnit.SECONDS)
             readTimeout(60, TimeUnit.SECONDS)
             writeTimeout(60, TimeUnit.SECONDS)
             addInterceptor(errorInterceptor)
+            addInterceptor(apiKeyInterceptor)
             addInterceptor(logger)
         }.build()
     }
@@ -56,5 +58,10 @@ object NetworkModule {
     @Provides
     fun provideErrorInterceptor() : ErrorInterceptor {
         return ErrorInterceptor()
+    }
+
+    @Provides
+    fun provideApiKeyInterceptor() : ApiKeyInterceptor {
+        return ApiKeyInterceptor()
     }
 }

@@ -23,6 +23,7 @@ android {
 
         debug {
             buildConfigField "String", "BASE_URL", "\"https://pixabay.com/\""
+            buildConfigField "String", "API_KEY", "\"33456474-eb6a56f63a9ae611faa1546d3\""
         }
 
         release {
