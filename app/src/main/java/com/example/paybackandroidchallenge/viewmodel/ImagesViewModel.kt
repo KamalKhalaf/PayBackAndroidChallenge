@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cache.room.ImageModel
+import com.example.cache.room.ImagesDao
 import com.example.common.BaseResult
 import com.example.common.SingleEvent
 import com.example.common.WrappedErrorResponse
@@ -28,7 +30,8 @@ import kotlin.math.ceil
 @HiltViewModel
 class ImagesViewModel @Inject constructor(
     private val getImagesFromRemoteUseCase: GetImagesFromRemoteUseCase,
-    private val getImagesFromLocalStorageUseCase: GetImagesFromLocalStorageUseCase
+    private val getImagesFromLocalStorageUseCase: GetImagesFromLocalStorageUseCase,
+    private val imagesDao: ImagesDao
 ) : ViewModel() {
 
     private val _state =
@@ -70,7 +73,9 @@ class ImagesViewModel @Inject constructor(
                     .collect { result ->
                         setLoading(false)
                         when (result) {
-                            is BaseResult.Success -> _state.value = ImagesViewStatus.SuccessGetImages(result.data)
+                            is BaseResult.Success -> {
+                                _state.value = ImagesViewStatus.SuccessGetImages(result.data)
+                            }
                             is BaseResult.Error -> _state.value = ImagesViewStatus.ErrorGetImages(result.rawResponse)
                         }
                     }

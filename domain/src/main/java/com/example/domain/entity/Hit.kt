@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Hit(
     @SerializedName("collections")
-    var collections: Int?,
+    var collections: Int? = null,
     @SerializedName("comments")
     var comments: Int?,
     @SerializedName("downloads")
@@ -16,39 +16,39 @@ data class Hit(
     @SerializedName("id")
     var id: Int?,
     @SerializedName("imageHeight")
-    var imageHeight: Int?,
+    var imageHeight: Int? = null,
     @SerializedName("imageSize")
-    var imageSize: Int?,
+    var imageSize: Int? = null,
     @SerializedName("imageWidth")
-    var imageWidth: Int?,
+    var imageWidth: Int? = null,
     @SerializedName("largeImageURL")
-    var largeImageURL: String?,
+    var largeImageURL: String? = null,
     @SerializedName("likes")
-    var likes: Int?,
+    var likes: Int? = null,
     @SerializedName("pageURL")
-    var pageURL: String?,
+    var pageURL: String? = null,
     @SerializedName("previewHeight")
-    var previewHeight: Int?,
+    var previewHeight: Int? = null,
     @SerializedName("previewURL")
-    var previewURL: String?,
+    var previewURL: String? = null,
     @SerializedName("previewWidth")
-    var previewWidth: Int?,
+    var previewWidth: Int? = null,
     @SerializedName("tags")
-    var tags: String?,
+    var tags: String? = null,
     @SerializedName("type")
-    var type: String?,
+    var type: String? = null,
     @SerializedName("user")
-    var user: String?,
+    var user: String? = null,
     @SerializedName("user_id")
-    var userId: Int?,
+    var userId: Int? = null,
     @SerializedName("userImageURL")
-    var userImageURL: String?,
+    var userImageURL: String? = null,
     @SerializedName("views")
-    var views: Int?,
+    var views: Int? = null,
     @SerializedName("webformatHeight")
-    var webformatHeight: Int?,
+    var webformatHeight: Int? = null,
     @SerializedName("webformatURL")
-    var webformatURL: String?,
+    var webformatURL: String? = null,
     @SerializedName("webformatWidth")
-    var webformatWidth: Int?
+    var webformatWidth: Int? = null
 ): Parcelable
