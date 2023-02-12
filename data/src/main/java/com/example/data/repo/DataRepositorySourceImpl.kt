@@ -30,11 +30,10 @@ class DataRepositorySourceImpl(
             emit(
                 when {
                     !networkConnectivity.isConnected() -> {
-
                         var hits: List<Hit?>?
                         val dataFromCache: List<ImageModel> = imagesDao.getImages()
                         hits = imageModelToHit(dataFromCache)
-                        val imagesPixabayList: ImagesPixabayList = ImagesPixabayList(hits)
+                        val imagesPixabayList = ImagesPixabayList(hits)
                         BaseResult.Success(imagesPixabayList)
                     }
                     response.isSuccessful -> {

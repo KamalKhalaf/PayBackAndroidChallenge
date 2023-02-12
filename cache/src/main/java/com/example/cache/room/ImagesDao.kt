@@ -18,7 +18,7 @@ interface ImagesDao {
     @Update(onConflict = OnConflictStrategy.IGNORE)
     suspend fun update(vararg images: ImageModel)
 
-    @Query("SELECT * FROM image_table")
+    @Query("SELECT * FROM image_table order by recordedAt desc")
     suspend fun getImages() : List<ImageModel>
 
     @Transaction
