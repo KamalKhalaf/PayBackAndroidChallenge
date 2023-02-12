@@ -27,7 +27,8 @@ class ImageDetailsFragment : BaseFragment<FragmentImageDetailsBinding>(FragmentI
         }
 
         binding.apply {
-            Glide.with(binding.root.context).load(args.imageDetails.previewURL).into(ivImage)
+            Glide.with(binding.root.context).load(args.imageDetails.previewURL)
+                .into(ivImage)
             tvUserName.text = args.imageDetails.user
             tvNumberComments.text = args.imageDetails.comments.toString()
             tvNumberDownloads.text = args.imageDetails.downloads.toString()

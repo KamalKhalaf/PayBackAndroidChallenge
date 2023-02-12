@@ -1,7 +1,7 @@
 package com.example.cache.room
 
 import androidx.room.*
-import com.example.domain.entity.ImagesPixabayList
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @Created by: Kamal.Farghali
@@ -10,18 +10,19 @@ import com.example.domain.entity.ImagesPixabayList
 
 
 @Dao
-internal interface ImagesDao {
+interface ImagesDao {
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(vararg movies: ImagesPixabayList)
+    suspend fun insert(vararg images: ImageModel?)
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun update(vararg movies: ImagesPixabayList)
+    suspend fun update(vararg images: ImageModel)
 
-    @Query("SELECT * FROM images WHERE q = : search")
-    suspend fun getImages(search: String) : ImagesPixabayList?
+    @Query("SELECT * FROM image_table")
+    suspend fun getImages() : List<ImageModel>
 
     @Transaction
-    suspend fun insertOrUpdate(vararg images: ImagesPixabayList) {
+    suspend fun insertOrUpdate(vararg images: ImageModel) {
         insert(*images)
         update(*images)
     }

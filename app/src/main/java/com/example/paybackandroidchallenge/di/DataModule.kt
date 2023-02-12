@@ -1,5 +1,6 @@
 package com.example.paybackandroidchallenge.di
 
+import com.example.cache.room.ImagesDao
 import com.example.common.NetworkConnectivity
 import com.example.data.remote.ServiceApi
 import com.example.data.repo.DataRepositorySourceImpl
@@ -28,8 +29,7 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideDataRepository(serviceApi: ServiceApi, networkConnectivity: NetworkConnectivity) : DataRepositorySource {
-        return DataRepositorySourceImpl(serviceApi, networkConnectivity)
+    fun provideDataRepository(serviceApi: ServiceApi, networkConnectivity: NetworkConnectivity, imagesDao: ImagesDao) : DataRepositorySource {
+        return DataRepositorySourceImpl(serviceApi, networkConnectivity, imagesDao)
     }
-
 }
