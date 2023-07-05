@@ -1,12 +1,9 @@
 package com.example.paybackandroidchallenge.viewmodel
 
-import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cache.room.ImageModel
-import com.example.cache.room.ImagesDao
 import com.example.common.BaseResult
 import com.example.common.SingleEvent
 import com.example.common.WrappedErrorResponse
@@ -16,10 +13,14 @@ import com.example.domain.usecase.GetImagesFromLocalStorageUseCase
 import com.example.domain.usecase.GetImagesFromRemoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.ceil
 
 /**
  * @Created by: Kamal.Farghali
@@ -30,8 +31,7 @@ import kotlin.math.ceil
 @HiltViewModel
 class ImagesViewModel @Inject constructor(
     private val getImagesFromRemoteUseCase: GetImagesFromRemoteUseCase,
-    private val getImagesFromLocalStorageUseCase: GetImagesFromLocalStorageUseCase,
-    private val imagesDao: ImagesDao
+    private val getImagesFromLocalStorageUseCase: GetImagesFromLocalStorageUseCase
 ) : ViewModel() {
 
     private val _state =

@@ -1,4 +1,4 @@
-package com.example.cache
+package com.example.cache.di
 
 import android.content.Context
 import androidx.room.Room
